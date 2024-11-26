@@ -39,27 +39,29 @@ function App() {
         {isLoading ? "... is loading" : "Search"}
       </button>
       <div>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="p-2 border text-left">Country</th>
-              <th className="p-2 border text-right"># of Flights</th>
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((item, index) => {
-              const country = Object.keys(item)[0];
-              const number = item[country];
+        {result.length > 0 && (
+          <table className="w-full border-collapse">
+            <thead>
+              <tr>
+                <th className="p-2 border text-left">Country</th>
+                <th className="p-2 border text-right"># of Flights</th>
+              </tr>
+            </thead>
+            <tbody>
+              {result.map((item, index) => {
+                const country = Object.keys(item)[0];
+                const number = item[country];
 
-              return (
-                <tr key={index}>
-                  <td className="p-2 border">{country}</td>
-                  <td className="p-2 border text-right">{number}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                return (
+                  <tr key={index}>
+                    <td className="p-2 border">{country}</td>
+                    <td className="p-2 border text-right">{number}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
