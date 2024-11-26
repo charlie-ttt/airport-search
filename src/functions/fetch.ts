@@ -1,6 +1,6 @@
 const API_KEY = import.meta.env.VITE_API_KEY_FLIGHT_API;
 
-const url = `https://api.flightapi.io/compschedule/${API_KEY}?mode=arrivals`;
+const url = `https://api.flightapi.io/compschedule/${API_KEY}?mode=arrivals&day=1`;
 
 // handle fetching data directly from flightAPI
 export async function fetchCompschedule(country: string) {
