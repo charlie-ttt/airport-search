@@ -3,11 +3,18 @@ import { fetchCompschedule } from "./fetch";
 // fetch API and convert to desired data format
 export async function getFlightOriginCountries(fromCountry: string) {
   const { data, error } = await fetchCompschedule(fromCountry);
-  if (error) throw new Error("failed to fetch");
+  if (error) throw new Error("failed to fetch: " + error);
 
-  const countryListArr = data.airport.pluginData.schedule.arrivals.data.map(
-    ({ flight }) => flight.airport.origin.position.country.name
-  );
+  const countryListArr: string[] = [];
+
+  for (const airportData of data) {
+    airportData.airport.pluginData.schedule.arrivals.data.forEach(
+      ({ flight }) => {
+        countryListArr.push(flight.airport.origin.position.country.name);
+      }
+    );
+  }
+
   return countCountriesWithMap(countryListArr);
 }
 

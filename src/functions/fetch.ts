@@ -30,7 +30,7 @@ type FlightAPIAirportResponse = {
       };
     };
   };
-};
+}[];
 
 type FlightData = {
   flight: {
