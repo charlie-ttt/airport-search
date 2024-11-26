@@ -1,4 +1,5 @@
 import { fetchCompschedule } from "./fetch";
+import { sortCountryCountFromHighest } from "./sort";
 
 // fetch API and convert to desired data format
 export async function getFlightOriginCountries(fromCountry: string) {
@@ -15,7 +16,9 @@ export async function getFlightOriginCountries(fromCountry: string) {
     );
   }
 
-  return { data: countCountriesWithMap(countryListArr) };
+  return {
+    data: sortCountryCountFromHighest(countCountriesWithMap(countryListArr)),
+  };
 }
 
 // format the output into CountryCountResult format: [ { Thailand: 3 }, { China: 2 }, { USA: 1 } ]
