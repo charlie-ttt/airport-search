@@ -3,7 +3,7 @@ import { fetchCompschedule } from "./fetch";
 // fetch API and convert to desired data format
 export async function getFlightOriginCountries(fromCountry: string) {
   const { data, error } = await fetchCompschedule(fromCountry);
-  if (error) throw new Error("failed to fetch: " + error);
+  if (error) return { data: [], error: "failed to fetch: " + error.message };
 
   const countryListArr: string[] = [];
 
@@ -15,7 +15,7 @@ export async function getFlightOriginCountries(fromCountry: string) {
     );
   }
 
-  return countCountriesWithMap(countryListArr);
+  return { data: countCountriesWithMap(countryListArr) };
 }
 
 // format the output into CountryCountResult format: [ { Thailand: 3 }, { China: 2 }, { USA: 1 } ]

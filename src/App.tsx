@@ -11,13 +11,14 @@ function App() {
   async function handleButtonClick() {
     setIsLoading(true);
 
-    try {
-      const data = await getFlightOriginCountries(searchTerm);
-      setResult(data);
-    } catch (error) {
+    const { data, error } = await getFlightOriginCountries(searchTerm);
+    if (error) {
+      setIsLoading(false);
       alert(error);
+      return;
     }
 
+    setResult(data);
     setIsLoading(false);
   }
 
