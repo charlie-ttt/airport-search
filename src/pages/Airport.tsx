@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./App.css";
-import type { CountryCountResult } from "./functions/get-flight-origin-countries";
-import { getFlightOriginCountries } from "./functions/get-flight-origin-countries";
+import type { CountryCountResult } from "../functions/get-flight-origin-countries";
+import { getFlightOriginCountries } from "../functions/get-flight-origin-countries";
+import "./Airport.css";
 
-function App() {
+function AirportApp() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<CountryCountResult>([]); // format [ { Thailand: 3 }, { China: 2 } ]
@@ -67,4 +67,4 @@ function App() {
   );
 }
 
-export default App;
+export default AirportApp;
