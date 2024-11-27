@@ -15,6 +15,18 @@ function Twitter() {
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  function handleUserType(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    // This can be implemented a couple of ways
+    // (1) If string length exceeds limit, we simply return out of function and don't update the text state
+    if (e.target.value.length > 120) {
+      return;
+    }
+    setContent(e.target.value);
+
+    // (2) Or we can slice a string to always be at 120 length - something like below
+    // setContent(e.target.value.slice(0, 120));
+  }
+
   async function handleButtonClick() {
     if (content.length === 0) {
       alert("Please add content");
@@ -38,12 +50,14 @@ function Twitter() {
       Create Tweet Here (max 120 characters):
       <br />
       <textarea
-        maxLength={120}
+        // maxLength={120}
         rows={10}
         cols={50}
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={handleUserType}
       ></textarea>
+      <br />
+      character count {content.length}/120
       <br />
       <button type="button" onClick={handleButtonClick} disabled={isLoading}>
         {isLoading ? "... is loading" : "Submit"}
