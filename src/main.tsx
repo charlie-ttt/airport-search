@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Airport from "./pages/Airport.tsx";
 import Twitter from "./pages/Twitter.tsx";
@@ -13,10 +13,10 @@ const router = createBrowserRouter([
         <nav>
           <ul>
             <li>
-              <a href={`/twitter`}>Twitter</a>
+              <Link to={`twitter`}>Twitter</Link>
             </li>
             <li>
-              <a href={`/airport`}>Airport</a>
+              <Link to={`twitter`}>Airport</Link>
             </li>
           </ul>
         </nav>
