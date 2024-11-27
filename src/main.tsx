@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Airport from "./pages/Airport.tsx";
+import Twitter from "./pages/Twitter.tsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/airport",
     element: <Airport />,
+  },
+  {
+    path: "/twitter",
+    element: <Twitter />,
   },
 ]);
 

@@ -1,70 +1,58 @@
 import { useState } from "react";
-import type { CountryCountResult } from "../functions/get-flight-origin-countries";
-import { getFlightOriginCountries } from "../functions/get-flight-origin-countries";
-import "./AirportApp.css";
 
-function AirportApp() {
-  const [searchTerm, setSearchTerm] = useState("");
+async function submitTwitterAPI() {
+  try {
+    await fetch(`https://api.test.com/`, {
+      method: "POST",
+      signal: AbortSignal.timeout(2000), // add 2 seconds timeout since fake API and it will never responds correctly
+    });
+  } catch (error) {
+    console.error("error:", error);
+  }
+}
+
+function Twitter() {
+  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<CountryCountResult>([]); // format [ { Thailand: 3 }, { China: 2 } ]
 
   async function handleButtonClick() {
-    setIsLoading(true);
-
-    const { data, error } = await getFlightOriginCountries(searchTerm);
-    if (error) {
-      setIsLoading(false);
-      alert(error);
+    if (content.length === 0) {
+      alert("Please add content");
+      return;
+    }
+    if (content.length > 120) {
+      alert("Content exceed 120 character limit");
       return;
     }
 
-    setResult(data);
+    setIsLoading(true);
+    await submitTwitterAPI();
+    alert("Your post has been submitted");
+    setContent("");
     setIsLoading(false);
   }
 
   return (
     <div>
-      <h1>Get Origin Countries of Flight Arriving at an Airport</h1>
-      <label>
-        Enter 3-character Airport Code:
-        <br />
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </label>
+      <h1>Twitter</h1>
+      Create Tweet Here (max 120 characters):
       <br />
-      <button type="button" onClick={handleButtonClick} disabled={isLoading}>
-        {isLoading ? "... is loading" : "Search"}
-      </button>
-      <div>
-        {result.length > 0 && (
-          <table className="w-full border-collapse">
-            <thead>
-              <tr>
-                <th className="p-2 border text-left">Country</th>
-                <th className="p-2 border text-right"># of Flights</th>
-              </tr>
-            </thead>
-            <tbody>
-              {result.map((item, index) => {
-                const country = Object.keys(item)[0];
-                const number = item[country];
-
-                return (
-                  <tr key={index}>
-                    <td className="p-2 border">{country}</td>
-                    <td className="p-2 border text-right">{number}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-      </div>
+      <form id="twitter-form">
+        <textarea
+          form="twitter-form"
+          maxLength={120}
+          rows={10}
+          cols={50}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        ></textarea>
+        <br />
+        <button type="button" onClick={handleButtonClick} disabled={isLoading}>
+          {isLoading ? "... is loading" : "Submit"}
+        </button>
+      </form>
     </div>
   );
 }
 
-export default AirportApp;
+export default Twitter;
