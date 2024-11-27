@@ -16,7 +16,7 @@ const router = createBrowserRouter([
               <Link to={`twitter`}>Twitter</Link>
             </li>
             <li>
-              <Link to={`twitter`}>Airport</Link>
+              <Link to={`airport`}>Airport</Link>
             </li>
           </ul>
         </nav>
