@@ -37,20 +37,17 @@ function Twitter() {
       <h1>Twitter</h1>
       Create Tweet Here (max 120 characters):
       <br />
-      <form id="twitter-form">
-        <textarea
-          form="twitter-form"
-          maxLength={120}
-          rows={10}
-          cols={50}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <br />
-        <button type="button" onClick={handleButtonClick} disabled={isLoading}>
-          {isLoading ? "... is loading" : "Submit"}
-        </button>
-      </form>
+      <textarea
+        maxLength={120}
+        rows={10}
+        cols={50}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      ></textarea>
+      <br />
+      <button type="button" onClick={handleButtonClick} disabled={isLoading}>
+        {isLoading ? "... is loading" : "Submit"}
+      </button>
     </div>
   );
 }
